@@ -1,16 +1,23 @@
-# This is a sample Python script.
+from node import TreeNode
+from traversals import (inorder_traversal,
+                        preorder_traversal, post_order_traversal, level_order_traversal)
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+def build_sample_tree() -> TreeNode:
+    root = TreeNode(10)
+    root.left = TreeNode(5)
+    root.right = TreeNode(15)
+    root.left.left = TreeNode(3)
+    root.left.right = TreeNode(7)
+    root.right.left = TreeNode(12)
+    root.right.right = TreeNode(18)
+
+    return root
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+if __name__ == "__main__":
+    root = build_sample_tree()
+    level_order_traversal(root)
