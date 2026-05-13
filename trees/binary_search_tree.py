@@ -90,8 +90,8 @@ class BinarySearchTree:
                 return root.left
             else:
                 min_node = self.minValueNode(root.right)
-                root.value = min_node.value
-                root.right = self.removeNode(root.right, min_node.value)
+                min_right = min_node.value
+                root.right = self.removeNode(root.right, min_right)
 
         return root
 
