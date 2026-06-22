@@ -1,6 +1,9 @@
 """Binary search tree implementation."""
+from typing import Optional
+
 from node import TreeNode
 
+from typing import List
 
 class BinarySearchTree:
     def __init__(self,root:TreeNode| None = None) -> None:
@@ -94,6 +97,21 @@ class BinarySearchTree:
                 root.right = self.removeNode(root.right, min_right)
 
         return root
+    def rightSideViewDFS(self,root:Optional[TreeNode])->List[int]:
+        if not root: return []
+
+        res = []
+
+        def dfs(node,level):
+            if not node: return
+            if level == len(res):
+                res.append(node.value)
+            dfs(node.right,level + 1)
+            dfs(node.left,level + 1)
+
+        dfs(root,0)
+        return res
+
 
 
 
