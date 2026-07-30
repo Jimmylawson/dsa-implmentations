@@ -1,18 +1,19 @@
 
 
 class PriorityQueue:
-    def __init__(self,elements:list[int]):
-        self.heap = elements
+    def __init__(self,elements:list[int] | None = None):
+        self.heap = elements[:] if elements else []
 
 
     def pop(self):
         if self.isEmpty():
             raise ValueError("Priority queue is empty")
-        root = self.heap[0]
-        last  = self.heap.pop()
+        heap = self.heap
+        root = heap[0]
+        last  = heap.pop()
 
         if not self.isEmpty():
-            self.heap[0] = last
+            heap[0] = last
             self.heapify_down()
 
         return root
@@ -41,11 +42,12 @@ class PriorityQueue:
 
 
         index = len(self.heap) - 1
+        heap = self.heap
         while index > 0:
             root_index = (index - 1) // 2
 
-            if self.heap[root_index] > self.heap[index]:
-                self.heap[root_index], self.heap[index] = self.heap[index], self.heap[root_index]
+            if heap[root_index] > heap[index]:
+                heap[root_index], heap[index] = heap[index], heap[root_index]
                 index = root_index
             else:
                 break
@@ -57,26 +59,26 @@ class PriorityQueue:
     def heapify_down(self):
 
         index  = 0
-
-        while index < len(self.heap):
+        heap = self.heap
+        while index < len(heap):
 
             left = 2 * index  + 1
             right = 2 * index + 2
 
-            if left >= len(self.heap):
+            if left >= len(heap):
                 break
 
             smaller_child = left
-            if right < len(self.heap) and self.heap[right] < self.heap[left]:
+            if right < len(heap) and heap[right] < heap[left]:
                 smaller_child = right
-            if self.heap[index] <= self.heap[smaller_child]:
+            if heap[index] <= heap[smaller_child]:
                 break
 
-            self.heap[index], self.heap[smaller_child] = (
-                self.heap[smaller_child], self.heap[index]
+            heap[index], heap[smaller_child] = (
+                heap[smaller_child], heap[index]
             )
             index = smaller_child
-        return self.heap
+        return heap
 
     def isEmpty(self):
         return len(self.heap) == 0
