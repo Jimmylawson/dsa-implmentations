@@ -54,11 +54,25 @@ class PriorityQueue:
 
         return self.heap
 
+    def build_heap(self):
+        heap  = self.heap
+
+        if self.isEmpty():
+            raise ValueError("Priority queue is empty")
 
 
-    def heapify_down(self):
+        start = len(self.heap) // 2 - 1
+        while start >= 0 :
+            self.heapify_down(start)
+            start -= 1
 
-        index  = 0
+
+
+
+
+
+    def heapify_down(self,index: int = 0):
+
         heap = self.heap
         while index < len(heap):
 
